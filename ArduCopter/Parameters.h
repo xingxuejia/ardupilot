@@ -475,6 +475,8 @@ public:
 /*
   2nd block of parameters, to avoid going past 256 top level keys
  */
+
+
 class ParametersG2 {
 public:
     ParametersG2(void);
@@ -620,6 +622,7 @@ public:
     // Autonmous autorotation
     AC_Autorotation arot;
 #endif
+    AP_Float star_radius_cm;
 };
 
 extern const AP_Param::Info        var_info[];
