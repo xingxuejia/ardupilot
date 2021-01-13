@@ -388,6 +388,11 @@
 #endif
 //////////////////////////////////////////////////////////////////////////////
 
+#ifndef MODE_DRAWSTAR_ENABLED
+    # define MODE_DRAWSTAR_ENABLED ENABLED
+#endif
+///////////////////////////////////////////////////////////////////////////////
+
 // Beacon support - support for local positioning systems
 #ifndef BEACON_ENABLED
 # define BEACON_ENABLED !HAL_MINIMIZE_FEATURES

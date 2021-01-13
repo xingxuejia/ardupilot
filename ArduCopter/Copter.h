@@ -236,6 +236,7 @@ public:
     friend class ModeThrow;
     friend class ModeZigZag;
     friend class ModeAutorotate;
+    friend class ModeDrawstar;
 
     Copter(void);
 
@@ -406,6 +407,7 @@ private:
     float arming_altitude_m;
 
     // Failsafe
+
     struct {
         uint32_t last_heartbeat_ms;      // the time when the last HEARTBEAT message arrived from a GCS - used for triggering gcs failsafe
         uint32_t terrain_first_failure_ms;  // the first time terrain data access failed - used to calculate the duration of the failure
@@ -992,6 +994,9 @@ private:
 #endif
 #if MODE_AUTOROTATE_ENABLED == ENABLED
     ModeAutorotate mode_autorotate;
+#endif
+#if MODE_DRAWSTAR_ENABLED == ENABLED
+    ModeDrawstar mode_drawstar;
 #endif
 
     // mode.cpp

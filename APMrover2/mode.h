@@ -30,7 +30,8 @@ public:
         RTL          = 11,
         SMART_RTL    = 12,
         GUIDED       = 15,
-        INITIALISING = 16
+        INITIALISING = 16,
+        DRAWSTAR     = 17
     };
 
     // Constructor

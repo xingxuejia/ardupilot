@@ -35,7 +35,8 @@ public:
         FOLLOW    =    23,  // follow attempts to follow another vehicle or ground station
         ZIGZAG    =    24,  // ZIGZAG mode is able to fly in a zigzag manner with predefined point A and point B
         SYSTEMID  =    25,  // System ID mode produces automated system identification signals in the controllers
-        AUTOROTATE =   26,  // Autonomous autorotation
+        AUTOROTATE =   26,// Autonomous autorotation
+        DRAWSTAR =     27,
     };
 
     // constructor
@@ -751,6 +752,38 @@ private:
 #endif // OPTFLOW
 
 
+class ModeDrawstar : public Mode {
+
+public:
+    // inherit constructor
+    using Mode::Mode;
+
+    bool init(bool ignore_checks) override;
+    void run() override;
+
+    bool requires_GPS() const override { return true; }
+    bool has_manual_throttle() const override { return false; }
+    bool allows_arming(bool from_gcs) const override { return from_gcs; }
+    bool is_autopilot() const override { return true; }
+    bool has_user_takeoff(bool must_navigate) const override { return true; }
+    bool in_guided_mode() const override { return true; }
+
+protected:
+
+    const char *name() const override { return "DRAWSTAR"; }
+    const char *name4() const override { return "DRAWSTAR"; }
+
+private:
+    Vector3f path[10];
+    int path_num;
+
+    void generate_path();
+    void pos_control_start();
+    void pos_control_run();
+    void vel_control_run();
+};
+
+
 class ModeGuided : public Mode {
 
 public:
@@ -813,7 +846,6 @@ private:
     GuidedMode guided_mode = Guided_TakeOff;
 
 };
-
 
 class ModeGuidedNoGPS : public ModeGuided {
 

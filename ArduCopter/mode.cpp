@@ -23,7 +23,7 @@ Mode::Mode(void) :
     channel_throttle(copter.channel_throttle),
     channel_yaw(copter.channel_yaw),
     G_Dt(copter.G_Dt)
-{ };
+{};
 
 float Mode::auto_takeoff_no_nav_alt_cm = 0;
 
@@ -168,6 +168,12 @@ Mode *Copter::mode_from_mode_num(const Mode::Number mode)
 #if MODE_AUTOROTATE_ENABLED == ENABLED
         case Mode::Number::AUTOROTATE:
             ret = &mode_autorotate;
+            break;
+#endif
+
+#if MODE_DRAWSTAR_ENABLED == ENABLED
+        case Mode::Number::DRAWSTAR:
+            ret=&mode_drawstar;
             break;
 #endif
 
