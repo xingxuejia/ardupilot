@@ -395,6 +395,7 @@ private:
 
     // This is the state of the flight control system
     // There are multiple states defined such as STABILIZE, ACRO,
+    int GUIDED = control_mode_t::GUIDED;
     Mode::Number control_mode;
     ModeReason control_mode_reason = ModeReason::UNKNOWN;
 
@@ -662,6 +663,7 @@ private:
     void rc_loop();
     void throttle_loop();
     void update_batt_compass(void);
+    void update_openmv(void);
     void fourhundred_hz_logging();
     void ten_hz_logging_loop();
     void twentyfive_hz_logging();

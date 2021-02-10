@@ -178,4 +178,5 @@ private:
     } load_test;
     
     static const struct load_data load_data1[];
+    Mode::Number GUIDED;
 };

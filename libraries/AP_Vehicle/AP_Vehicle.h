@@ -34,6 +34,7 @@
 #include <AP_SerialManager/AP_SerialManager.h>      // Serial manager library
 #include <AP_ServoRelayEvents/AP_ServoRelayEvents.h>
 #include <AP_Hott_Telem/AP_Hott_Telem.h>
+#include <AP_OpenMV/AP_OpenMV.h>
 
 class AP_Vehicle : public AP_HAL::HAL::Callbacks {
 
@@ -121,6 +122,7 @@ protected:
     AP_GPS gps;
     AP_Baro barometer;
     Compass compass;
+    AP_OpenMV openmv;
     AP_InertialSensor ins;
     AP_Button button;
     RangeFinder rangefinder;
