@@ -395,7 +395,7 @@ private:
 
     // This is the state of the flight control system
     // There are multiple states defined such as STABILIZE, ACRO,
-    int GUIDED = control_mode_t::GUIDED;
+
     Mode::Number control_mode;
     ModeReason control_mode_reason = ModeReason::UNKNOWN;
 

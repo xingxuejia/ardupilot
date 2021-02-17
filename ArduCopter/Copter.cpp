@@ -337,8 +337,7 @@ void Copter::update_openmv(void)
     //simulation
     bool sim_openmv_new_data = false;
     static uint32_t last_sim_new_data_time_ms = 0;
-//    Number GUIDED = Number::GUIDED;
-    if (control_mode != GUIDED)
+    if (control_mode != Mode::Number::GUIDED)
     {
         last_sim_new_data_time_ms = millis();
         openmv.cx = 80;

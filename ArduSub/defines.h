@@ -30,7 +30,7 @@ enum autopilot_yaw_mode {
 };
 
 // Auto Pilot Modes enumeration
-enum control_mode_t : uint8_t {
+enum control_mode_t : uint8_t{
     STABILIZE =     0,  // manual angle with manual depth/throttle
     ACRO =          1,  // manual body-frame angular rate with manual depth/throttle
     ALT_HOLD =      2,  // manual angle with automatic depth/throttle
