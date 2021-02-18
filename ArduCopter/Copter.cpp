@@ -141,6 +141,7 @@ const AP_Scheduler::Task Copter::scheduler_tasks[] = {
 #endif
     SCHED_TASK_CLASS(AP_Notify,            &copter.notify,              update,          50,  90),
     SCHED_TASK(one_hz_loop,            1,    100),
+    SCHED_TASK(update_openmv,        400,    100),
     SCHED_TASK(ekf_check,             10,     75),
     SCHED_TASK(check_vibration,       10,     50),
     SCHED_TASK(gpsglitch_check,       10,     50),
@@ -331,6 +332,35 @@ void Copter::update_batt_compass(void)
     }
 }
 
+void Copter::update_openmv(void)
+{
+    //simulation
+    static uint32_t last_sim_new_data_time_ms = 0;
+    bool sim_openmv_new_data=false;
+    if (control_mode != Mode::Number::GUIDED)
+    {
+        last_sim_new_data_time_ms = millis();
+        openmv.cx = 80;
+        openmv.cy = 60;
+    } else if (millis() - last_sim_new_data_time_ms < 15000){
+        sim_openmv_new_data = true;
+        openmv.last_frame_ms = millis();
+        openmv.cx = 1;
+        openmv.cy = 1;
+    } else if (millis() - last_sim_new_data_time_ms < 30000){
+        sim_openmv_new_data = true;
+        openmv.last_frame_ms = millis();
+        openmv.cx = 160;
+        openmv.cy = 120;
+    } else {
+        sim_openmv_new_data = false;
+        openmv.cx = 80;
+        openmv.cy = 60;
+    }
+    openmv.update();
+    // end of sim
+}
+
 // Full rate logging of attitude, rate and pid loops
 // should be run at 400hz
 void Copter::fourhundred_hz_logging()
@@ -469,6 +499,11 @@ void Copter::one_hz_loop()
 #endif
 
     AP_Notify::flags.flying = !ap.land_complete;
+
+    gcs().send_text(MAV_SEVERITY_CRITICAL,
+            "OpenMV X:%d Y:%d",
+            openmv.cx,
+            openmv.cy);
 }
 
 // called at 50hz
